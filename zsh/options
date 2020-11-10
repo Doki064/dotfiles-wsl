@@ -1,0 +1,5 @@
+# Set zsh options
+setopt AUTO_CD
+setopt APPEND_HISTORY
+setopt SHARE_HISTORY
+setopt HIST_REDUCE_BLANKS

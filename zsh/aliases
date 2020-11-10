@@ -1,0 +1,2 @@
+# Set ls return colored results
+alias ls="ls --color=auto"

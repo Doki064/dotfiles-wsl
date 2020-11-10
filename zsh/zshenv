@@ -1,0 +1,10 @@
+# Set zsh history file
+HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"
+HISTTIMEFORMAT="[%F %T] " 
+HISTSIZE=1000000
+SAVEHIST=100000
+
+# Configure auto suggestions
+ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+ZSH_AUTOSUGGEST_COMPLETION_IGNORE="git *"
