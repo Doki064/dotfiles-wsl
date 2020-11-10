@@ -57,7 +57,7 @@ zinit wait"0b" lucid for \
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-source $HOME/.local/share/dircolors.sh
+source $HOME/.local/share/lscolors.sh
 
 # Load options
 source $ZDOTDIR/.options
