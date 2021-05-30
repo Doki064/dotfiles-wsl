@@ -45,12 +45,14 @@ zinit for \
       romkatv/powerlevel10k
 
 # Load a few useful plugins for zsh with Turbo
-zinit wait lucid light-mode for \
-  atinit"zicompinit; zicdreplay" \
+zinit wait lucid for \
+  light-mode atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+      Aloxaf/fzf-tab \
+  light-mode \
       zdharma/fast-syntax-highlighting \
-  atload"_zsh_autosuggest_start" \
+  light-mode atload"_zsh_autosuggest_start" \
       zsh-users/zsh-autosuggestions \
-  blockf atpull'zinit creinstall -q .' \
+  blockf atpull"zinit creinstall -q ." \
       zsh-users/zsh-completions
 
 zinit wait"0b" lucid for \
@@ -61,10 +63,6 @@ zinit wait"0c" lucid for \
       OMZL::git.zsh \
       OMZP::git \
       OMZP::pipenv
-
-zinit wait"1" lucid for \
-  light-mode atinit"ZINIT[COMPINIT_OPTS]=-C" \
-      Aloxaf/fzf-tab
 
 zinit as"null" wait"1" lucid \
   atclone'PYENV_ROOT="$PWD" ./libexec/pyenv init --path > zpyenv.zsh' \
