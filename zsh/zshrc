@@ -5,9 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Load ls_colors
-source $HOME/.local/share/lscolors.sh
-
 # Load options
 source $ZDOTDIR/.options
 
@@ -46,30 +43,47 @@ zinit for \
 
 # Load a few useful plugins for zsh with Turbo
 zinit wait lucid for \
-  light-mode atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-      Aloxaf/fzf-tab \
-  light-mode \
-      zdharma/fast-syntax-highlighting \
-  light-mode atload"_zsh_autosuggest_start" \
-      zsh-users/zsh-autosuggestions \
   blockf atpull"zinit creinstall -q ." \
-      zsh-users/zsh-completions
+      zsh-users/zsh-completions \
+  as"completion" \
+      https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
 
-zinit wait"0b" lucid for \
+zinit wait lucid for \
       OMZP::colored-man-pages \
       OMZP::command-not-found
 
-zinit wait"0c" lucid for \
+zinit wait lucid for \
       OMZL::git.zsh \
       OMZP::git \
       OMZP::pipenv
 
-zinit as"null" wait"1" lucid \
+zinit wait lucid as"null" for \
   atclone'PYENV_ROOT="$PWD" ./libexec/pyenv init --path > zpyenv.zsh' \
-  atinit'export PYENV_ROOT="$PWD"' atpull"%atclone" \
-  atload'eval "$(pyenv init -)"' \
-  sbin"bin/pyenv" src"zpyenv.zsh" nocompile'!' for \
+  atinit'export PYENV_ROOT="$PWD"' atload'eval "$(pyenv init -)"' \
+  atpull"%atclone" src"zpyenv.zsh" nocompile'!' sbin"bin/pyenv" \
       pyenv/pyenv
+
+zinit wait lucid as"null" from"gh-r" for \
+  sbin"bin/exa" \
+      ogham/exa
+
+zinit wait lucid reset \
+  atclone"[[ -z ${commands[dircolors]} ]] && local P=g
+    \${P}sed -i '/DIR/c\DIR 38;5;63;1' LS_COLORS; \
+    \${P}dircolors -b LS_COLORS > clrs.zsh" \
+  atpull'%atclone' pick"clrs.zsh" nocompile'!' \
+  atload'zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"' for \
+      trapd00r/LS_COLORS
+
+zinit wait"1a" lucid light-mode for \
+  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+      Aloxaf/fzf-tab
+
+zinit wait"1" lucid for \
+  atload"!_zsh_autosuggest_start" \
+      zsh-users/zsh-autosuggestions \
+  light-mode \
+      zdharma/fast-syntax-highlighting
 
 ### End of Zinit's installer chunk
 
