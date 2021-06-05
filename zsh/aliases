@@ -1,2 +1,9 @@
 # Set ls return colored results
-alias ls="ls -a --color=auto"
+alias ls="ls --color=auto"
+
+# Set aliases for exa
+alias l="exa -F"
+alias lt='exa -TF --level=2'
+alias ll="exa -laF --time-style=long-iso --no-user"
+alias la="exa -labTFh --color-scale --level=2 --git --time-style=long-iso --octal-permissions --no-user"
+alias lx="exa -labTFhHimSuU@ --color-scale --level=2 --git --time-style=long-iso --octal-permissions --no-user"
