@@ -22,6 +22,14 @@ done
 ln -svfn "$(readlink -f ./zshenv)" "$HOME/.zshenv"
 ln -svfn "$(readlink -f ./p10k.zsh)" "$HOME/.p10k.zsh"
 
+# Install gnupg config
+if [ ! -d "$HOME/.gnupg" ]; then
+    mkdir "$HOME/.gnupg"
+fi
+for f in $(find gnupg/* -type f); do
+    ln -svfn "$(readlink -f $f)" "$HOME/.gnupg/.$(basename $f)"
+done
+
 # Install git config
 ln -svfn "$(readlink -f ./gitconfig)" "$HOME/.gitconfig"
 

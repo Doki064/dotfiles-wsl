@@ -1,0 +1,22 @@
+[core]
+	excludesfile = ~/.gitignore
+[init]
+	defaultBranch = main
+[commit]
+	gpgsign = true
+[color]
+	ui = auto
+	diff = auto
+	status = auto
+	interactive = auto
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[help]
+	autocorrect = 1
+[pull]
+	rebase = true
+[url "git@github.com:"]
+	pushInsteadOf = https://github.com/
+	pushInsteadOf = git://github.com/
