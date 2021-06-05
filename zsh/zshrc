@@ -64,6 +64,7 @@ zinit wait lucid for \
       OMZL::git.zsh \
       OMZP::git \
       OMZP::pipenv \
+  atinit'zstyle :omz:plugins:ssh-agent identities id_github_key' \
       OMZP::ssh-agent
 
 zinit wait lucid as"null" for \
