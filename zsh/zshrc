@@ -63,9 +63,7 @@ zinit wait lucid for \
 zinit wait lucid for \
       OMZL::git.zsh \
       OMZP::git \
-      OMZP::pipenv \
-  atinit'zstyle :omz:plugins:ssh-agent identities id_github_key' \
-      OMZP::ssh-agent
+      OMZP::pipenv
 
 zinit wait lucid as"null" for \
   atclone"./libexec/pyenv init --path > zpyenv.path.zsh; ./libexec/pyenv init - > zpyenv.zsh" \
