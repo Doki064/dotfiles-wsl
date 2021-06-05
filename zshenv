@@ -1,5 +1,7 @@
 # Connect to display
-export DISPLAY=:0.0
+export DISPLAY="$(/sbin/ip route | awk '/default/ { print $3 }'):0"
+
+export GPG_TTY=$TTY
 
 # Set zsh dotfile directory
 export ZDOTDIR=$HOME/.zsh
