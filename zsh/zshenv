@@ -1,3 +1,8 @@
+# Set path
+if [ -d "$HOME/.local/bin" ]; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
 # Set zsh history file
 HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"
 HISTTIMEFORMAT="[%F %T] " 

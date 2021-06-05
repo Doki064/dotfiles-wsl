@@ -46,7 +46,11 @@ zinit wait lucid for \
   blockf atpull"zinit creinstall -q ." \
       zsh-users/zsh-completions \
   as"completion" \
-      https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
+      https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker \
+  id-as=pipx atclone="register-python-argcomplete pipx > pipx.gen.zsh" \
+  atinit"autoload -Uz bashcompinit; bashcompinit" \
+  atpull="%atclone" src="pipx.gen.zsh" \
+      zdharma/null
 
 zinit wait lucid for \
       OMZP::colored-man-pages \
@@ -58,9 +62,9 @@ zinit wait lucid for \
       OMZP::pipenv
 
 zinit wait lucid as"null" for \
-  atclone'PYENV_ROOT="$PWD" ./libexec/pyenv init --path > zpyenv.zsh' \
-  atinit'export PYENV_ROOT="$PWD"' atload'eval "$(pyenv init -)"' \
-  atpull"%atclone" src"zpyenv.zsh" nocompile'!' sbin"bin/pyenv" \
+  atclone"./libexec/pyenv init --path > zpyenv.path.zsh; ./libexec/pyenv init - > zpyenv.zsh" \
+  atinit'export PYENV_ROOT="$PWD"' atpull"%atclone" \
+  multisrc"zpyenv.path.zsh zpyenv.zsh" nocompile"!" sbin"bin/pyenv" \
       pyenv/pyenv
 
 zinit wait lucid as"null" from"gh-r" for \
