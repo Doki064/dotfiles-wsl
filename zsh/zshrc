@@ -61,9 +61,10 @@ zinit wait lucid for \
       OMZP::command-not-found
 
 zinit wait lucid for \
-      OMZL::git.zsh \
+      OMZP::sudo \
+      OMZP::pipenv \
       OMZP::git \
-      OMZP::pipenv
+      OMZL::git.zsh
 
 zinit wait lucid as"null" for \
   atclone"./libexec/pyenv init --path > zpyenv.path.zsh; ./libexec/pyenv init - > zpyenv.zsh" \
