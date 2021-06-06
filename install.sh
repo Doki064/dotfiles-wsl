@@ -53,8 +53,8 @@ for f in $(find gnupg/* -type f); do
 done
 
 chown -R "$USER:$(id -gn)" ~/.gnupg
-chmod 700 ~/.gnupg
-chmod 600 ~/.gnupg/*
+find ~/.gnupg -type f -exec chmod 600 {} \; # Set 600 for files
+find ~/.gnupg -type d -exec chmod 700 {} \; # Set 700 for directories
 
 # Install ssh config
 if [ ! -d "$HOME/.ssh" ]; then
@@ -72,8 +72,8 @@ for f in $(find ssh/* -type f); do
 done
 
 chown -R "$USER:$(id -gn)" ~/.ssh
-chmod 700 ~/.ssh
-chmod 600 ~/.ssh/*
+find ~/.ssh -type f -exec chmod 600 {} \; # Set 600 for files
+find ~/.ssh -type d -exec chmod 700 {} \; # Set 700 for directories
 
 # Install git config
 ln -svfn "$(readlink -f ./gitconfig)" "$HOME/.gitconfig"
