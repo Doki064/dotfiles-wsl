@@ -27,6 +27,9 @@ source "$HOME/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
+autoload -U bashcompinit
+bashcompinit
+
 # Load colors
 autoload -U colors
 colors
@@ -60,15 +63,6 @@ zinit wait lucid for \
       OMZP::git \
       OMZL::git.zsh
 
-zinit wait lucid as"null" for \
-  atclone"./libexec/pyenv init --path > zpyenv.path.zsh && ./libexec/pyenv init - > zpyenv.zsh" \
-  atinit'export PYENV_ROOT="$PWD"' atpull"%atclone" \
-  multisrc"zpyenv.path.zsh zpyenv.zsh" nocompile"!" sbin"bin/pyenv" \
-      pyenv/pyenv \
-  atclone'ln -sfn "$PWD" "$PYENV_ROOT/plugins/pyenv-virtualenv" && ./bin/pyenv-virtualenv-init - > zpyenv.venv.zsh' \
-  atpull"%atclone" src"zpyenv.venv.zsh" \
-      pyenv/pyenv-virtualenv
-
 zinit wait lucid as"null" from"gh-r" for \
   sbin"bin/exa" \
       ogham/exa
@@ -93,6 +87,11 @@ zinit wait"1" lucid for \
 
 ### End of Zinit's installer chunk
 
+# Pyenv install
+if [ -d $PYENV_ROOT ]; then
+    source $PYENV_ROOT/zpyenv.zsh
+    source $PYENV_ROOT/zpyenv.venv.zsh
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

@@ -1,7 +1,5 @@
-# Set path
-if [ -d "$HOME/.local/bin" ]; then
-    export PATH="$HOME/.local/bin:$PATH"
-fi
+# Set browser
+export BROWSER=/mnt/c/Program\ Files\ (x86)/Microsoft/Edge/Application/msedge.exe
 
 # Set display
 export DISPLAY="$(/sbin/ip route | awk '/default/ { print $3 }'):0"
@@ -13,6 +11,18 @@ fi
 export GPG_TTY=$TTY
 eval "$(gpg-connect-agent updatestartuptty /bye >/dev/null)"
 #eval "$(keychain --quiet --agents gpg --eval 0x7E3F3C9C9599B027)"
+
+# Set path
+if [ -d "$HOME/.local/bin" ]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+
+# Pyenv path
+if [ -d $HOME/.penv ]; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    source $PYENV_ROOT/zpyenv.path.zsh
+fi
 
 # Set zsh history file
 HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"
