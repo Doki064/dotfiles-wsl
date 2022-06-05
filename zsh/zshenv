@@ -1,5 +1,5 @@
 # Set browser
-export BROWSER=/mnt/c/Program\ Files\ (x86)/Microsoft/Edge/Application/msedge.exe
+export BROWSER="mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
 
 # Set display
 export DISPLAY="$(/sbin/ip route | awk '/default/ { print $3 }'):0"
@@ -15,22 +15,15 @@ eval "$(gpg-connect-agent updatestartuptty /bye >/dev/null)"
 if [ -d "$HOME/.local/bin" ]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
-source "$HOME/.cargo/env"
+# source "$HOME/.cargo/env"
 
 # PEP582
 if command -v pdm >/dev/null 2>&1; then
     if [ -n "$PYTHONPATH" ]; then
-        export PYTHONPATH='/home/minhdoki/.local/pipx/venvs/pdm/lib/python3.8/site-packages/pdm/pep582':$PYTHONPATH
+        export PYTHONPATH="/home/minhdoki/.local/share/pdm/venv/lib/python3.8/site-packages/pdm/pep582":$PYTHONPATH
     else
-        export PYTHONPATH='/home/minhdoki/.local/pipx/venvs/pdm/lib/python3.8/site-packages/pdm/pep582'
+        export PYTHONPATH="/home/minhdoki/.local/share/pdm/venv/lib/python3.8/site-packages/pdm/pep582"
     fi
-fi
-
-# Pyenv path
-if [ -d $HOME/.pyenv ]; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    source $PYENV_ROOT/zpyenv.path.zsh
 fi
 
 # Set zsh history file
