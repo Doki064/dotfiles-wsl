@@ -14,16 +14,18 @@ source $ZDOTDIR/.functions
 # Load aliases
 source $ZDOTDIR/.aliases
 
-### Added by Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+## Added by Zinit's installer
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+
+if [[ ! -f "${ZINIT_HOME}/zinit.zsh" ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$(dirname $ZINIT_HOME)" && command chmod g-rwX "$(dirname $ZINIT_HOME)"
+    command git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME" && \
         print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
         print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
 
-source "$HOME/.zinit/bin/zinit.zsh"
+source "${ZINIT_HOME}/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
@@ -37,53 +39,50 @@ colors
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit light-mode for \
-      zinit-zsh/z-a-rust \
-      zinit-zsh/z-a-as-monitor \
-      zinit-zsh/z-a-patch-dl \
-      zinit-zsh/z-a-bin-gem-node
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
 
 # Load theme and plugins without Turbo
 zinit for \
-      agkozak/zsh-z \
-  light-mode depth"1" \
-      romkatv/powerlevel10k
+        agkozak/zsh-z \
+    light-mode depth"1" \
+        romkatv/powerlevel10k
 
 # Load a few useful plugins for zsh with Turbo
 zinit wait lucid for \
-  blockf atpull"zinit creinstall -q ." \
-      zsh-users/zsh-completions
+    OMZP::colored-man-pages \
+    OMZP::command-not-found
 
 zinit wait lucid for \
-      OMZP::colored-man-pages \
-      OMZP::command-not-found
-
-zinit wait lucid for \
-      OMZP::sudo \
-      OMZP::pipenv \
-      OMZP::git \
-      OMZL::git.zsh
+    OMZP::sudo \
+    OMZP::git \
+    OMZL::git.zsh
 
 zinit wait lucid as"null" from"gh-r" for \
-  sbin"bin/exa" \
-      ogham/exa
+    sbin"bin/exa" \
+        ogham/exa
 
 zinit wait lucid reset \
-  atclone"[[ -z ${commands[dircolors]} ]] && local P=g
-    \${P}sed -i '/DIR/c\DIR 38;5;63;1' LS_COLORS; \
-    \${P}dircolors -b LS_COLORS > clrs.zsh" \
-  atpull'%atclone' pick"clrs.zsh" nocompile'!' \
-  atload'zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"' for \
-      trapd00r/LS_COLORS
+    atclone"[[ -z ${commands[dircolors]} ]] && local P=g
+        \${P}sed -i '/DIR/c\DIR 38;5;63;1' LS_COLORS; \
+        \${P}dircolors -b LS_COLORS > clrs.zsh" \
+    atpull'%atclone' pick"clrs.zsh" nocompile'!' \
+    atload'zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"' for \
+        trapd00r/LS_COLORS
 
 zinit wait"1a" lucid light-mode for \
-  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-      Aloxaf/fzf-tab
+    atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+        Aloxaf/fzf-tab
 
 zinit wait"1" lucid for \
-  atload"!_zsh_autosuggest_start" \
-      zsh-users/zsh-autosuggestions \
-  light-mode \
-      zdharma/fast-syntax-highlighting
+    light-mode \
+        zdharma-continuum/fast-syntax-highlighting \
+    blockf atpull"zinit creinstall -q ." \
+        zsh-users/zsh-completions
+    atload"!_zsh_autosuggest_start" \
+        zsh-users/zsh-autosuggestions
 
 ### End of Zinit's installer chunk
 
