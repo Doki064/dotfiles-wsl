@@ -15,6 +15,7 @@ eval "$(gpg-connect-agent updatestartuptty /bye >/dev/null)"
 if [ -d "$HOME/.local/bin" ]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
+source "$HOME/.cargo/env"
 
 # PEP582
 if command -v pdm >/dev/null 2>&1; then
