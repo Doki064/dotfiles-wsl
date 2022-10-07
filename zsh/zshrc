@@ -50,9 +50,9 @@ zi wait"1a" lucid reset \
         trapd00r/LS_COLORS
 
 zi wait"2a" lucid as"null" from"gh-r" for \
-    sbin"bin/exa" \
+    mv"exa* -> exa" sbin"bin/exa" \
         ogham/exa \
-    sbin"fd/fd" \
+    mv"fd* -> fd" sbin"fd/fd" \
         @sharkdp/fd
 
 zi wait"2b" lucid for \
