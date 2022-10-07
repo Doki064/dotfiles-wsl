@@ -33,22 +33,15 @@ zi for \
 
 # Load a few useful plugins for zsh with Turbo
 zi wait lucid for \
+    as"completion" \
+        OMZP::docker/_docker \
     OMZP::colored-man-pages \
     OMZP::command-not-found \
     OMZP::sudo \
     OMZP::git \
     OMZL::git.zsh
 
-zi wait lucid as"null" from"gh-r" for \
-    sbin"bin/exa" \
-        ogham/exa
-
-zi wait"1a" lucid as"null" from"gh" atinit"export PYENV_ROOT='$HOME/.pyenv'" \
-    atclone"PYENV_ROOT='$HOME/.pyenv' ./libexec/pyenv init - > zpyenv.zsh" \
-    atpull"%atclone" src"zpyenv.zsh" nocompile"!" sbin"bin/pyenv" for \
-        pyenv/pyenv
-
-zi wait"1b" lucid reset \
+zi wait"1a" lucid reset \
     atclone"[[ -z ${commands[dircolors]} ]] && local P=g
         \${P}sed -i '/DIR/c\DIR 38;5;63;1' LS_COLORS; \
         \${P}dircolors -b LS_COLORS > clrs.zsh" \
@@ -56,15 +49,28 @@ zi wait"1b" lucid reset \
     atload'zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"' for \
         trapd00r/LS_COLORS
 
-zi wait"1c" lucid for \
+zi wait"2a" lucid as"null" from"gh-r" for \
+    sbin"bin/exa" \
+        ogham/exa \
+    sbin"fd/fd" \
+        @sharkdp/fd
+
+zi wait"2b" lucid for \
+    light-mode \
+        Aloxaf/fzf-tab \
+    as"null" from"gh" atinit"export PYENV_ROOT='$HOME/.pyenv'" \
+    atclone"PYENV_ROOT='$HOME/.pyenv' ./libexec/pyenv init - > zpyenv.zsh" \
+    atpull"%atclone" src"zpyenv.zsh" nocompile"!" sbin"bin/pyenv" \
+        pyenv/pyenv
+
+zi wait lucid light-mode for \
+    z-shell/H-S-MW \
     atinit"ZI[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
         z-shell/F-Sy-H \
-    blockf \
-        zsh-users/zsh-completions \
-    atload"!_zsh_autosuggest_start" \
+    atload"_zsh_autosuggest_start" \
         zsh-users/zsh-autosuggestions \
-    light-mode \
-        Aloxaf/fzf-tab
+    blockf atpull'zi creinstall -q .' \
+        zsh-users/zsh-completions
 
 # ### End of Zi's installer chunk
 
