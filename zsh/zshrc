@@ -6,16 +6,23 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Load options
-source $ZDOTDIR/.options
+source "$ZDOTDIR/.options"
 
 # Load functions
-source $ZDOTDIR/.functions
+source "$ZDOTDIR/.functions"
 
 # Load aliases
-source $ZDOTDIR/.aliases
+source "$ZDOTDIR/.aliases"
 
 # Load Zi
-source <(curl -sL https://git.io/zi-loader); zzinit
+if [[ ! -f $HOME/.zi/bin/zi.zsh ]]; then
+  print -P "%F{33}▓▒░ %F{160}Installing (%F{33}z-shell/zi%F{160})…%f"
+  command mkdir -p "$HOME/.zi" && command chmod go-rwX "$HOME/.zi"
+  command git clone -q --depth=1 --branch "main" https://github.com/z-shell/zi "$HOME/.zi/bin" && \
+    print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+    print -P "%F{160}▓▒░ The clone has failed.%f%b"
+fi
+source "$HOME/.zi/bin/zi.zsh"
 
 autoload -Uz _zi
 (( ${+_comps} )) && _comps[zi]=_zi
@@ -33,12 +40,9 @@ zi for \
 
 # Load a few useful plugins for zsh with Turbo
 zi wait lucid for \
-    as"completion" \
-        OMZP::docker/_docker \
     OMZP::colored-man-pages \
     OMZP::command-not-found \
     OMZP::sudo \
-    OMZP::git \
     OMZL::git.zsh
 
 zi wait"1a" lucid reset \
@@ -83,3 +87,6 @@ bashcompinit
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# bun completions
+[ -s "/home/minhd/.bun/_bun" ] && source "/home/minhd/.bun/_bun"

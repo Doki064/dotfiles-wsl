@@ -10,3 +10,6 @@ alias lx="exa -labTFhHimSuU@ --color-scale --level=2 --git --time-style=long-iso
 
 # Set alias to open directory
 alias open="explorer.exe"
+
+alias ssh='ssh.exe'
+alias ssh-add='ssh-add.exe'

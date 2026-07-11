@@ -1,8 +1,17 @@
 [core]
     excludesfile = ~/.gitignore
     attributesfile = ~/.gitattributes
+    sshCommand = ssh.exe
 [init]
     defaultBranch = main
+[user]
+    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEP6BV52zdu8oNHDkcszucXzLEzjAIGPLMi4N66ZAgo0
+	email = 52833936+Doki064@users.noreply.github.com
+	name = Doki064
+[gpg]
+    format = ssh
+[gpg "ssh"]
+    program = "/mnt/c/Users/minhd/AppData/Local/Microsoft/WindowsApps/op-ssh-sign-wsl.exe"
 [commit]
     gpgsign = true
 [color]
@@ -28,3 +37,9 @@
     smudge = git-lfs smudge -- %f
     process = git-lfs filter-process
     required = true
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
