@@ -1,3 +1,4 @@
 [tools]
+actionlint = "latest"
 eza = "latest"
 fd = "latest"
