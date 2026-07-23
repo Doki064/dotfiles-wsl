@@ -1,0 +1,5 @@
+# A failing test is evidence about the code, not an obstacle
+
+When a test fails, the default assumption is that the code is wrong, not the test. The burden of proof sits on changing the test. "Making it pass" by editing the test — deleting it, skipping it, loosening an assertion, updating the expected value to whatever the code currently produces, or mocking away the behavior under test — silently converts a regression guard into a snapshot of the bug.
+
+**How to apply:** Before touching a failing test, determine which side is wrong: read the test's intent (name, comments, the commit that added it) and the code path it pins. Change or delete a test only when you can state *why the test is wrong* — the behavior was intentionally changed by this task, the test pins implementation details, or it's a genuine duplicate — and put that justification in the response and commit message, not just in your head. If you can't confidently say which side is wrong, leave the test red and surface the uncertainty to the user: a red test is recoverable, a silently weakened one isn't.
