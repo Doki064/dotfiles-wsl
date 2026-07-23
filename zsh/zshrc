@@ -54,8 +54,8 @@ zi wait"1a" lucid reset \
         trapd00r/LS_COLORS
 
 zi wait"2a" lucid as"null" from"gh-r" for \
-    mv"exa* -> exa" sbin"bin/exa" \
-        ogham/exa \
+    bpick"*.tar.gz" sbin"eza" \
+        eza-community/eza \
     mv"fd* -> fd" sbin"fd/fd" \
         @sharkdp/fd
 

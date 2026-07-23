@@ -1,12 +1,13 @@
 # Set ls return colored results
 alias ls="ls --color=auto"
 
-# Set aliases for exa
-alias l="exa -F"
-alias lt='exa -TF --level=2'
-alias ll="exa -laF --time-style=long-iso"
-alias la="exa -labTFh --color-scale --level=2 --git --time-style=long-iso --octal-permissions"
-alias lx="exa -labTFhHimSuU@ --color-scale --level=2 --git --time-style=long-iso --octal-permissions"
+# Set aliases for eza
+# --classify=auto instead of -F: eza's bare -F swallows a following path
+alias l="eza --classify=auto"
+alias lt='eza -T --level=2 --classify=auto'
+alias ll="eza -la --time-style=long-iso --classify=auto"
+alias la="eza -labTh --color-scale --level=2 --git --time-style=long-iso --octal-permissions --classify=auto"
+alias lx="eza -labThHimSuU@ --color-scale --level=2 --git --time-style=long-iso --octal-permissions --classify=auto"
 
 # Set alias to open directory
 alias open="explorer.exe"
