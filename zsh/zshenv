@@ -1,5 +1,5 @@
 # Set browser
-export BROWSER="mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
+export BROWSER="/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
 
 # Set display
 export DISPLAY="$(/sbin/ip route | awk '/default/ { print $3 }'):0"
