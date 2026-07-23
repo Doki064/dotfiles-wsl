@@ -10,4 +10,6 @@ All human-oriented documentation (READMEs, guides, docstrings, handoffs, changel
 
 Spacing is part of clarity, not decoration: a wall of text fails the five Cs even when every sentence in it passes. Break prose into short paragraphs (one idea each, blank line between), use headings to mark section boundaries, and reach for a list or table when the content is enumerable. If a paragraph runs past ~5 sentences or a section has no visual break, restructure it.
 
+Unlike the five Cs above, spacing applies to ALL docs, including model-facing ones (CLAUDE.md, rules, agent and skill prompts, memory notes, plan/handoff files) — humans open and review those too, so none of them gets to be a wall of text.
+
 When conciseness and completeness pull apart, completeness of the *reader's task* wins — trim scope, not necessary steps. Before finishing a doc, reread it as its target reader and fix what fails a C.
