@@ -1,7 +1,6 @@
 # GitHub
 Host github.com gist.github.com
     User git
-    ForwardAgent yes
 
 Host *
     AddKeysToAgent yes
