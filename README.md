@@ -35,8 +35,8 @@ Do not run with `sudo`. Re-running is safe: existing links are replaced.
   installs itself on first shell start and pulls the plugins listed in
   `zsh/zshrc`.
 - [mise](https://mise.jdx.dev) installs the CLI tools pinned in
-  `config/mise/config.toml` (eza, fd, actionlint): `curl https://mise.run | sh`,
-  then `mise install`.
+  `config/mise/config.toml` (eza, fd, actionlint, uv, bun):
+  `curl https://mise.run | sh`, then `mise install`.
 - Windows-side tools for interop: Windows OpenSSH (`ssh.exe`, used by git via
   `core.sshCommand` and by the `ssh` alias), 1Password SSH commit signing
   (`op-ssh-sign-wsl.exe`), and `gh` for GitHub credentials.

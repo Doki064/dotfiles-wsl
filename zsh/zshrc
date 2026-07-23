@@ -77,8 +77,6 @@ bashcompinit
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# bun completions
-[ -s "/home/minhd/.bun/_bun" ] && source "/home/minhd/.bun/_bun"
 
 # Activate mise (installs and versions cli tools: eza, fd, ...)
 command -v mise >/dev/null && eval "$(mise activate zsh)"

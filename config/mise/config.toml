@@ -1,4 +1,6 @@
 [tools]
 actionlint = "latest"
+bun = "latest"
 eza = "latest"
 fd = "latest"
+uv = "latest"
