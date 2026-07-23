@@ -53,19 +53,8 @@ zi wait"1a" lucid reset \
     atload'zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"' for \
         trapd00r/LS_COLORS
 
-zi wait"2a" lucid as"null" from"gh-r" for \
-    bpick"*.tar.gz" sbin"eza" \
-        eza-community/eza \
-    mv"fd* -> fd" sbin"fd/fd" \
-        @sharkdp/fd
-
-zi wait"2b" lucid for \
-    light-mode \
-        Aloxaf/fzf-tab \
-    as"null" from"gh" atinit"export PYENV_ROOT='$HOME/.pyenv'" \
-    atclone"PYENV_ROOT='$HOME/.pyenv' ./libexec/pyenv init - > zpyenv.zsh" \
-    atpull"%atclone" src"zpyenv.zsh" nocompile"!" sbin"bin/pyenv" \
-        pyenv/pyenv
+zi wait"2b" lucid light-mode for \
+    Aloxaf/fzf-tab
 
 zi wait lucid light-mode for \
     z-shell/H-S-MW \
@@ -90,3 +79,6 @@ bashcompinit
 
 # bun completions
 [ -s "/home/minhd/.bun/_bun" ] && source "/home/minhd/.bun/_bun"
+
+# Activate mise (installs and versions cli tools: eza, fd, ...)
+command -v mise >/dev/null && eval "$(mise activate zsh)"

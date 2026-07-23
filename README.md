@@ -17,6 +17,7 @@ place, so the repo stays the single source of truth.
 | `ssh/*` | `~/.ssh/*` |
 | `gitconfig`, `gitignore`, `gitattributes` | `~/.gitconfig`, `~/.gitignore`, `~/.gitattributes` |
 | `claude/rules/*` | `~/.claude/rules/*` (global Claude Code rules) |
+| `config/mise/*` | `~/.config/mise/*` (mise tool versions) |
 
 ## Install
 
@@ -33,6 +34,9 @@ Do not run with `sudo`. Re-running is safe: existing links are replaced.
 - WSL2 with zsh. The [zi](https://github.com/z-shell/zi) plugin manager
   installs itself on first shell start and pulls the plugins listed in
   `zsh/zshrc`.
+- [mise](https://mise.jdx.dev) installs the CLI tools pinned in
+  `config/mise/config.toml` (eza, fd): `curl https://mise.run | sh`, then
+  `mise install`.
 - Windows-side tools for interop: Windows OpenSSH (`ssh.exe`, used by git via
   `core.sshCommand` and by the `ssh` alias), 1Password SSH commit signing
   (`op-ssh-sign-wsl.exe`), and `gh` for GitHub credentials.

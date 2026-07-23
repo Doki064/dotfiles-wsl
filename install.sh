@@ -59,3 +59,6 @@ link gitattributes "$HOME/.gitattributes"
 # Install global Claude Code rules (enterprise-context-no-leak.md stays
 # private in ~/.claude/rules and is never tracked here)
 link_dir claude/rules "$HOME/.claude/rules"
+
+# Install mise config (tool versions)
+link_dir config/mise "$HOME/.config/mise"
