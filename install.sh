@@ -55,3 +55,7 @@ find "$HOME/.ssh" -type d -exec chmod 700 {} \;  # Set 700 for directories
 link gitconfig "$HOME/.gitconfig"
 link gitignore "$HOME/.gitignore"
 link gitattributes "$HOME/.gitattributes"
+
+# Install global Claude Code rules (enterprise-context-no-leak.md stays
+# private in ~/.claude/rules and is never tracked here)
+link_dir claude/rules "$HOME/.claude/rules"
