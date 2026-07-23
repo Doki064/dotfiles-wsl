@@ -40,6 +40,7 @@ Do not run with `sudo`. Re-running is safe: existing links are replaced.
 ## Extras
 
 - `git-remove-forever.sh` — purge paths from a repository's entire history
-  (uses `git filter-branch`; run from a repo root).
+  (requires [git-filter-repo](https://github.com/newren/git-filter-repo);
+  run from a repo root).
 - `~/.claude/rules/enterprise-context-no-leak.md` is deliberately left
   untracked: work-related rules stay out of this public repo.
