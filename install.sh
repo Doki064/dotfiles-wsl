@@ -11,93 +11,47 @@ if [ -n "$SUDO_COMMAND" ]; then
     exit 1
 fi
 
-cd "$(pwd)"
+cd "$(dirname "$0")"
+
+# link <repo-file> <target>: symlink target to the repo file
+link() {
+    ln -svfn "$(readlink -f "$1")" "$2"
+
+    if [ -L "$2" ] && [ -e "$2" ]; then
+        echo $GREEN "Installed successfully" $NOCOLOR
+    else
+        echo $RED "Error: $1 failed to install" $NOCOLOR
+    fi
+}
+
+# link_dir <repo-dir> <target-dir> [dot]: link every file in a repo dir;
+# pass "dot" to prefix each target basename with a dot
+link_dir() {
+    mkdir -p "$2"
+    for f in "$1"/*; do
+        [ -f "$f" ] || continue
+        link "$f" "$2/${3:+.}$(basename "$f")"
+    done
+}
 
 # Install personal zsh config
-if [ ! -d "$HOME/.zsh" ]; then
-    mkdir "$HOME/.zsh"
-fi
-
-for f in $(find zsh/* -type f); do
-    ln -svfn "$(readlink -f $f)" "$HOME/.zsh/.$(basename $f)"
-
-    if [ -L "$HOME/.zsh/.$(basename $f)" ] && [ -e "$HOME/.zsh/.$(basename $f)" ]; then
-        echo $GREEN "Installed successfully" $NOCOLOR
-    else
-        echo $RED "Error: $f failed to install" $NOCOLOR
-    fi
-done
-
-ln -svfn "$(readlink -f ./zshenv)" "$HOME/.zshenv"
-if [ -L "$HOME/.zshenv" ] && [ -e "$HOME/.zshenv" ]; then
-    echo $GREEN "Installed successfully" $NOCOLOR
-else
-    echo $RED "Error: $(pwd)/zshenv failed to install" $NOCOLOR
-fi
-
-ln -svfn "$(readlink -f ./p10k.zsh)" "$HOME/.p10k.zsh"
-if [ -L "$HOME/.p10k.zsh" ] && [ -e "$HOME/.p10k.zsh" ]; then
-    echo $GREEN "Installed successfully" $NOCOLOR
-else
-    echo $RED "Error: $(pwd)/p10k.zsh failed to install" $NOCOLOR
-fi
+link_dir zsh "$HOME/.zsh" dot
+link zshenv "$HOME/.zshenv"
+link p10k.zsh "$HOME/.p10k.zsh"
 
 # Install gnupg config
-if [ ! -d "$HOME/.gnupg" ]; then
-    mkdir "$HOME/.gnupg"
-fi
-
-for f in $(find gnupg/* -type f); do
-    ln -svfn "$(readlink -f $f)" "$HOME/.gnupg/$(basename $f)"
-
-    if [ -L "$HOME/.gnupg/$(basename $f)" ] && [ -e "$HOME/.gnupg/$(basename $f)" ]; then
-        echo $GREEN "Installed successfully" $NOCOLOR
-    else
-        echo $RED "Error: $f failed to install" $NOCOLOR
-    fi
-done
-
-chown -R "$USER:$(id -gn)" ~/.gnupg
-find ~/.gnupg -type f -exec chmod 600 {} \;  # Set 600 for files
-find ~/.gnupg -type d -exec chmod 700 {} \;  # Set 700 for directories
+link_dir gnupg "$HOME/.gnupg"
+chown -R "$USER:$(id -gn)" "$HOME/.gnupg"
+find "$HOME/.gnupg" -type f -exec chmod 600 {} \;  # Set 600 for files
+find "$HOME/.gnupg" -type d -exec chmod 700 {} \;  # Set 700 for directories
 
 # Install ssh config
-if [ ! -d "$HOME/.ssh" ]; then
-    mkdir "$HOME/.ssh"
-fi
-
-for f in $(find ssh/* -type f); do
-    ln -svfn "$(readlink -f $f)" "$HOME/.ssh/$(basename $f)"
-
-    if [ -L "$HOME/.ssh/$(basename $f)" ] && [ -e "$HOME/.ssh/$(basename $f)" ]; then
-        echo $GREEN "Installed successfully" $NOCOLOR
-    else
-        echo $RED "Error: $f failed to install" $NOCOLOR
-    fi
-done
-
-chown -R "$USER:$(id -gn)" ~/.ssh
-find ~/.ssh -type f -exec chmod 600 {} \;  # Set 600 for files
-find ~/.ssh -type d -exec chmod 700 {} \;  # Set 700 for directories
+link_dir ssh "$HOME/.ssh"
+chown -R "$USER:$(id -gn)" "$HOME/.ssh"
+find "$HOME/.ssh" -type f -exec chmod 600 {} \;  # Set 600 for files
+find "$HOME/.ssh" -type d -exec chmod 700 {} \;  # Set 700 for directories
 
 # Install git config
-ln -svfn "$(readlink -f ./gitconfig)" "$HOME/.gitconfig"
-if [ -L "$HOME/.gitconfig" ] && [ -e "$HOME/.gitconfig" ]; then
-    echo $GREEN "Installed successfully" $NOCOLOR
-else
-    echo $RED "Error: $(pwd)/gitconfig failed to install" $NOCOLOR
-fi
-
-ln -svfn "$(readlink -f ./gitignore)" "$HOME/.gitignore"
-if [ -L "$HOME/.gitignore" ] && [ -e "$HOME/.gitignore" ]; then
-    echo $GREEN "Installed successfully" $NOCOLOR
-else
-    echo $RED "Error: $(pwd)/gitignore failed to install" $NOCOLOR
-fi
-
-ln -svfn "$(readlink -f ./gitattributes)" "$HOME/.gitattributes"
-if [ -L "$HOME/.gitattributes" ] && [ -e "$HOME/.gitattributes" ]; then
-    echo $GREEN "Installed successfully" $NOCOLOR
-else
-    echo $RED "Error: $(pwd)/gitattributes failed to install" $NOCOLOR
-fi
+link gitconfig "$HOME/.gitconfig"
+link gitignore "$HOME/.gitignore"
+link gitattributes "$HOME/.gitattributes"
