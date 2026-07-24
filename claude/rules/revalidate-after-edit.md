@@ -1,6 +1,6 @@
 # Re-validate after every edit
 
-A validation pass is only valid for the exact bytes it reviewed. Any edit after the last validator/review run — a one-line tweak, a formatting pass, a docs-quality sweep (five Cs, spacing) — makes that pass stale. Prose-only edits count fully: a skill or agent IS its markdown, so editing the markdown edits the component.
+A validation pass is only valid for the exact bytes it reviewed. Any edit after the last validator/review run — a one-line tweak, a formatting pass, a docs-quality sweep (five Cs, spacing, structure) — makes that pass stale. Prose-only edits count fully: a skill or agent IS its markdown, so editing the markdown edits the component.
 
 - SKILL.md → skill-reviewer
 - agents / manifests / commands / hooks → plugin-validator
