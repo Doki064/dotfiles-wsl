@@ -12,6 +12,9 @@ Documentation is judged on two axes: the **five Cs** — is the content good? �
 
 When conciseness and completeness pull apart, completeness of the *reader's task* wins — trim scope, not necessary steps. Before finishing a doc, reread it as its target reader and fix what fails a C.
 
+- **Walkthroughs sit in the reader's seat.** Example/tutorial docs are written as what the reader types and sees (You type / You'll be asked / What lands / Next), never as a tour of the system's internal stages — internals narration is the single biggest readability failure in generated example docs. Mechanism gets one sentence and a pointer to the reference doc.
+- **Build/phase progress never lives in committed docs.** Committed docs describe the product (README, USAGE, CHANGELOG, architecture); "what's built, what's next" is dev-session state and belongs in local files (handoff, plans). A status section in a committed file is drift bait.
+
 ## Readability mechanics (all docs, including model-facing)
 
 These govern how the words sit on the page, not what they say — so unlike the five Cs they apply to model-facing docs too (CLAUDE.md, rules, agent and skill prompts, memory notes, plan/handoff files). Two reasons: humans open and review those, and clear structure also improves how a model retrieves and follows them. **The one caution for model-facing docs:** restructure for scannability *without inflating* — a lean, front-loaded, labeled shape, not a bullet farm.

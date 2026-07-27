@@ -14,3 +14,5 @@ Tier ladder: `fable` > `opus` > `sonnet` > `haiku`. Everything below is relative
 - Never let subagents silently inherit the session model — always pass an explicit `model`.
 - Project agents (`.claude/agents/`): if the definition pins a model clearly unsuited to the task, adjust the model override for that spawn — freely within the at-or-below band; going above the session model follows the escalation gate above.
 - The session model's role in a session is orchestrator and integrator: decompose, dispatch, judge results, synthesize — not line worker.
+- **Briefs are hypotheses, not facts.** When delegating writing or fixture-building, require the agent to verify every brief-stated claim against the actual bytes (per-claim `file:line` cites + a flags section for anything unverifiable) and explicitly license it to contradict the brief with evidence — transcribed brief errors are the main source of confident fiction in delegated output.
+- **After an abnormal batch termination** (session limit, kill), enumerate what each dead agent actually landed on disk before re-dispatching — partial edit lists double-apply or conflict under a blind re-run.
